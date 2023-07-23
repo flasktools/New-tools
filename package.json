@@ -5,7 +5,7 @@
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
-		"build": "webpack",
+		"build": "node index.js ",
 		"dev": "nodemon"
 	},
 	"keywords": [],
@@ -24,19 +24,21 @@
 		"webpack-userscript": "^3.2.2"
 	},
 	"nodemonConfig": {
-		"exec": "webpack",
 		"watch": [
 			"src",
-			"index.js"
+			"modules"
 		],
 		"ext": "js",
 		"ignore": [
-			"dist"
-		]
+			"dist",
+			"node_modules"
+		],
+		"exec": "node index.js"
 	},
 	"dependencies": {
 		"fs": "^0.0.1-security",
 		"path": "^0.12.7",
+		"prettier": "^3.0.0",
 		"url": "^0.11.1"
 	}
 }

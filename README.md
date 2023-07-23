@@ -1,5 +1,20 @@
 # The Script
 
+Created with the idea of making a modular tool for the game Grepolis, this script is a collection of modules that can be activated and deactivated at will.
+
+## Local development
+
+Install node.js and npm. Then, run the following commands:
+
+```bash
+npm install
+npm run dev
+```
+
+It will start a nodemon server that will automatically reload the script when a file is changed.
+
+## Create a new module
+
 Under the folder modules, place all the modules. All the modules are automatically imported in the final script:
 
 Each module need to have:
