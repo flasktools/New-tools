@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const { UserscriptPlugin } = require('webpack-userscript');
 
@@ -20,12 +21,9 @@ module.exports = {
 			},
 		}),
 	],
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
-			},
-		],
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, 'src'),
+		},
 	},
 };

@@ -1,4 +1,4 @@
-import Base from '../setup.js';
+import Base from '../src/setup.js';
 
 class BugFixes extends Base {
 	activate() {
@@ -14,5 +14,3 @@ class BugFixes extends Base {
 		$('#version').css('position', 'unset');
 	}
 }
-
-export default BugFixes;
