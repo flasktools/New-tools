@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*", "utility/*"]
+		}
+	},
+	"exclude": ["dist", "some_dirs_dont_have_code"]
+}

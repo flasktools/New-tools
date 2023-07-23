@@ -1,4 +1,5 @@
-import Base from '../src/setup.js';
+import Base from '@/base';
+import ITowns from '@/ITowns';
 
 class BugFixes extends Base {
 	activate() {
