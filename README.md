@@ -13,6 +13,20 @@ npm run dev
 
 It will start a nodemon server that will automatically reload the script when a file is changed.
 
+Add this to tampermonkey to test the script, and change the path to the script:
+
+```
+// ==UserScript==
+// @name The Script
+// @description A script for grepolis
+// @version 0.0.1
+// @author Sau1707
+// @match https://*.grepolis.com/game/*
+// @require http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+// @require      file://C:\Users\Administrator\Documents\NEW-TOOLS\dist\newTool.user.js
+// ==/UserScript==
+```
+
 ## Create a new module
 
 Under the folder modules, place all the modules. All the modules are automatically imported in the final script:

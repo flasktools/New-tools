@@ -1,31 +1,35 @@
 /**
- * @typedef {Object} Town
- * @property {string} name - The name of the town.
- * @property {number} population - The population of the town.
+ * @namespace Town
+ * @desc Represents a town.
  */
-const Town = {};
+const Town = {
+	/**
+	 * @type {int}
+	 * @desc The ID of the town.
+	 */
+	id: 0,
+};
 
 /**
  * @namespace ITowns
- * @description Represents a collection of functions for managing towns.
+ * @desc Represents a collection of functions for managing towns.
  */
 const ITowns = {
 	/**
 	 * @type {Object.<number, Town>}
-	 * @description The population of the town.
+	 * @desc The population of the town.
 	 */
 	towns: {},
 
 	/**
-	 *  Get a town by its ID.
-	 *
+	 * @desc Get a town by its ID.
 	 * @param {string} townId - The ID of the town to retrieve.
 	 * @returns {Town} The town object with the specified ID.
 	 */
 	getTown: function (townId) {},
 
 	/**
-	 * Get the current town.
+	 * @desc Get the current town.
 	 * @returns {Town} The current town object.
 	 */
 	getCurrentTown: function () {},

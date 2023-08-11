@@ -1,21 +1,17 @@
 import Base from '@/base';
-import ITowns from '@/ITowns';
 
-class BugFixes extends Base {
+class Template extends Base {
 	activate() {
 		this.subscribe(GPWindowMgr.TYPE_PLAYER_SETTINGS, this.onOpenSettings);
 	}
 
 	deactivate() {
 		this.unsubscribe(this.onOpenSettings);
-		let a = 1;
-		let b = 2;
-		let c = 3;
-		let d = 4;
 	}
 
 	/* Fix the position */
 	onOpenSettings() {
+		console.log('here');
 		$('#version').css('position', 'unset');
 	}
 }

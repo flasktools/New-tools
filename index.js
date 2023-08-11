@@ -2,15 +2,24 @@ import { readFileSync, readdirSync, statSync, writeFileSync, appendFileSync } fr
 import { join, parse } from 'path';
 import { format } from 'prettier';
 
+const SCRIPTNAME = 'The Script';
 const header = `
     // ==UserScript==
-    // @name The Script
+    // @name ${SCRIPTNAME}
     // @description A script for grepolis
     // @version 0.0.1
     // @author Sau1707
     // @match https://*.grepolis.com/game/*
     // @require http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
     // ==/UserScript==
+
+    const uw = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
+`
+	.replace(/^\s+/g, '')
+	.replace(/^[ \t]+/gm, '');
+
+const footer = `
+console.log('%c|= ${SCRIPTNAME} is active =|', 'color: purple; font-size: 1em; font-weight: bolder; ');
 `
 	.replace(/^\s+/g, '')
 	.replace(/^[ \t]+/gm, '');
@@ -22,7 +31,7 @@ function clearFile(filePath) {
 
 async function wrapFileContentInIIFE(filePath) {
 	var content = readFileSync(filePath, 'utf8');
-	content = `(() => {\n${content}\n})();`;
+	content = `(() => {\n${content}${footer}\n})();`;
 
 	const prettierOptions = {
 		semi: true,
@@ -54,12 +63,18 @@ class File {
 	}
 
 	removeComments() {
-		const contentWithoutSingleLineComments = this.content.replace(/\/\/.*/g, '');
-		const contentWithoutAllComments = contentWithoutSingleLineComments.replace(
-			/\/\*[\s\S]*?\*\//g,
-			'',
-		);
-		this.lines = contentWithoutAllComments.split('\n');
+		this.lines = this.lines.reduce((newLines, line) => {
+			// Check if the line is a comment
+			line = line.trim();
+
+			if (line.startsWith('//')) return newLines;
+			if (line.startsWith('/*')) return newLines;
+			if (line.startsWith('*/')) return newLines;
+			if (line.startsWith('*')) return newLines;
+
+			newLines.push(line);
+			return newLines;
+		}, []);
 	}
 
 	removeBlankLines() {
@@ -141,7 +156,9 @@ function mergeModules(directoryPath, outputFilePath) {
 		const file = new Module(filePath);
 
 		if (!file.isModule()) return accumulator;
-		return accumulator + file.getContent();
+		const inizialize = `uw.${file.getClassName().toLowerCase()} = new ${file.getClassName()}`;
+		const activate = `uw.${file.getClassName().toLowerCase()}.activate();`;
+		return accumulator + file.getContent() + '\n' + inizialize + '\n' + activate + '\n';
 	}, '');
 
 	appendFileSync(outputFilePath, mergedContent);
